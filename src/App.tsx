@@ -4,10 +4,9 @@ import { loginSchema } from "./types/schema/auth.schema";
 export default function App() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [state, setState] = useState<any>(null)
+  const [state, setState] = useState<any>(null);
 
-
-  console.log(state)
+  console.log(state);
 
   function handleLogin() {
     // data validation
@@ -15,8 +14,8 @@ export default function App() {
     const validation = loginSchema.safeParse({ email, password }); // safeParse = mengembalikan data error > Parse
     // console.log(validation)
 
-    if(!validation.success) {
-      setState(validation.error.flatten().fieldErrors)
+    if (!validation.success) {
+      setState(validation.error.flatten().fieldErrors);
     }
 
     // // mock data
@@ -29,16 +28,32 @@ export default function App() {
   }
 
   return (
-    <div>
-      <input onChange={(e) => setEmail(e.target.value)} />
-      {state?.email ? (
-        <div role="emailValidation">{state?.email[0]}</div>
-      ) : null}
-      <input onChange={(e) => setPassword(e.target.value)} />
-      {state?.password ? (
-        <div role="passwordValidation">{state?.password[0]}</div>
-      ) : null}
-      <button role="loginBtn" onClick={handleLogin}>Login</button>
+    <div className="h-screen flex flex-col space-y-5 justify-center items-center">
+      <div className="flex flex-col space-y-2">
+        <input
+          role="emailInput"
+          onChange={(e) => setEmail(e.target.value)}
+          className="border-slate-500 p-2 border-2 rounded-3xl w-48"
+        />
+        {state?.email ? (
+          <div role="emailValidation">{state?.email[0]}</div>
+        ) : null}
+        <input
+          role="passwordInput"
+          onChange={(e) => setPassword(e.target.value)}
+          className="border-slate-500 p-2 border-2 rounded-3xl w-48"
+        />
+        {state?.password ? (
+          <div role="passwordValidation">{state?.password[0]}</div>
+        ) : null}
+      </div>
+      <button
+        role="loginBtn"
+        onClick={handleLogin}
+        className="bg-red-300 rounded-3xl px-3 py-2"
+      >
+        Login
+      </button>
     </div>
   );
 }

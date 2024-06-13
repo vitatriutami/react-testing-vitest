@@ -1,7 +1,9 @@
+import cypress from "cypress";
+
 describe("template spec", () => {
   // it, setiap test
   it("passes", () => {
-    cy.visit("http://localhost:5137");
+    cy.visit("http://localhost:5173");
 
     const emailInput = cy.get("input[role=emailInput]");
     const passwordInput = cy.get("input[role=passwordInput]");
